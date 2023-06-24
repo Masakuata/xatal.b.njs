@@ -3,10 +3,10 @@ name: Generate OpenApi Spec
 on:
   pull_request:
     branches:
-      - master
+      - main
   push:
     branches:
-      - master
+      - main
 
 jobs:
   spec_gen:
