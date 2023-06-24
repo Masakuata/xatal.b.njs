@@ -1,0 +1,86 @@
+openapi: 3.0.0
+info:
+  title: Xatal
+  description: Xatal backend service
+  version: 0.0.1
+servers:
+  - url: 'http://clayrite.ddns.net:42110'
+    description: Development server
+paths:
+  /user:
+    $ref: './user_catalog.yaml'
+  /user/{id}:
+    summary: Fetch, update and delete specific users
+    description: Perform operations against users already registered on the system
+    get:
+      summary: Fetch information about a specific user identified by its id
+      description: Retrieve all the information about one specific user
+      tags:
+        - User
+      parameters:
+        - name: id
+          schema:
+            type: integer
+            minimum: 1
+            example: 25
+          in: path
+          required: true
+      responses:
+        200:
+          description: The user was found and its information sent
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/createdUser'
+        400:
+          description: The request is wrong or malformed and cannot be processed
+        404:
+          description: This id is not associated to any registered user
+        406:
+          description: The request is unacceptable due to missing or invalid values
+    patch:
+      summary: Update one user's information
+      description: Update the information of one specific user identified by its id
+      tags:
+        - User
+      parameters:
+        - name: id
+          schema:
+            type: integer
+            minimum: 1
+            example: 25
+          in: path
+          required: true
+      responses:
+        200:
+          description: The user was found and its information updated
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/createdUser'
+        400:
+          description: The request is wrong or malformed and cannot be processed
+        404:
+          description: This id is not associated to any registered user
+        406:
+          description: The request is unacceptable due to missing or invalid values
+    delete:
+      summary: Delete a user from the system
+      description: Remove all the information of one specific user
+      tags:
+        - User
+      parameters:
+        - name: id
+          schema:
+            type: integer
+            minimum: 1
+            example: 25
+          in: path
+          required: true
+      responses:
+        204:
+          description: The user was found and its information deleted permanently
+        400:
+          description: The request is wrong or malformed and cannot be performed
+        404:
+          description: This id is not associated to any registered user

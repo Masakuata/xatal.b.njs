@@ -126,7 +126,7 @@ export class UserService {
 
     const response = await DbConnection.insert(query, [id]);
     if (response && response.affectedRows == 1) {
-      status = HttpStatus.OK;
+      status = HttpStatus.NO_CONTENT;
     }
 
     return status;

@@ -1,0 +1,46 @@
+components:
+  schemas:
+    creationUser:
+      type: object
+      title: User to register
+      required: [ name, email, password ]
+      properties:
+        name:
+          type: string
+          title: Full user name
+          description: The full name of the user to be registered
+          maxLength: 100
+          minLength: 5
+          example: John Doe Martinez
+        email:
+          type: string
+          title: User email address
+          description: The email address of the user to be registered
+          maxLength: 320
+          minLength: 5
+          format: email
+          example: johndm@cutemail.com
+        password:
+          type: string
+          title: User password
+          description: The secret password of the user to be registered
+          maxLength: 40
+          minLength: 8
+          example: secretPassw0rd
+    createdUser:
+      type: object
+      title: User already registered
+      required: [ id ]
+      properties:
+        id:
+          type: integer
+          title: User id
+          description: An integer used as discriminator of one specific registered user
+          minimum: 1
+          example: 25
+        status:
+          type: integer
+          title: Status of the user on the system
+          example: 1
+      allOf:
+        - $ref: '#/components/schemas/creationUser'
