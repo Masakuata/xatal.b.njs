@@ -34,5 +34,5 @@ jobs:
       - name: Deploy to GH Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.EDSON_GITHUB_TOKEN }}
+          github_token: ${{ secrets.EDSON_PERSONAL_TOKEN }}
           publish_dir: specs
