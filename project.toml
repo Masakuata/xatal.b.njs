@@ -1,0 +1,10 @@
+name = "Xatal-b"
+version = "0.0.1"
+description = "A backend REST API service to manage xatals web app processes"
+license = "MIT"
+authors = [
+    "Edson Manuel Carballo Vera <edsonmanuelcarballovera@gmail.com>",
+]
+maintainers = [
+    "Edson Manuel Carballo Vera <edsonmanuelcarballovera@gmail.com>"
+]
