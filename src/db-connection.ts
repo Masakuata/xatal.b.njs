@@ -1,4 +1,5 @@
 import { Logger } from '@nestjs/common';
+import * as process from 'process';
 
 export interface InsertResult {
   affectedRows: number;
@@ -11,7 +12,7 @@ export class DbConnection {
   static readonly pool = require('mariadb').createPool({
     host: 'warestore.crcln0nsujd0.us-east-2.rds.amazonaws.com',
     user: 'xnuser',
-    password: 'm4WUPUB9nehbwNUvQdgP',
+    password: process.env.DB_PASSWORD,
     database: 'User',
   });
 
