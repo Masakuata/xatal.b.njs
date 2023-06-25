@@ -15,12 +15,6 @@ export class UserController {
     response.status(status).send(newUser);
   }
 
-  @Get()
-  async findAll(@Res() response: Response) {
-    const [status, users] = await this.userService.findAll();
-    response.status(status).send(users);
-  }
-
   @Get(':id')
   async findOne(@Param('id') id: string, @Res() response: Response) {
     const [status, user] = await this.userService.findOne(id);
