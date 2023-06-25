@@ -72,4 +72,4 @@ jobs:
           docker buildx build \
           --push \
           --tag $tag \
-          --platform linux/386,linux/amd64 .
+          --platform linux/amd64 .
