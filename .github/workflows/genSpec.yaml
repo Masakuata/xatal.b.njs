@@ -65,7 +65,7 @@ jobs:
 
       - name: Construir con buildx
         env:
-          tag: ${{ steps.pVersion.output.value }}
+          tag: ${{ steps.pVersion.outputs.value }}
         run: |
           image="w3edd/xatal_b"
           tag=$image:$tag
