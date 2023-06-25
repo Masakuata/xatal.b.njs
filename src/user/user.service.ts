@@ -115,6 +115,7 @@ export class UserService {
     );
     if (response && response.affectedRows > 0) {
       user = registeredUser;
+      status = HttpStatus.OK;
     }
 
     return [status, user];
