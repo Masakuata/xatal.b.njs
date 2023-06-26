@@ -36,10 +36,9 @@ export class UserService {
   }
 
   async update(_id: string, updateUserDto: UpdateUserDto): Promise<[HttpStatus, Document]> {
-    if (await UserService.mongo.updateOne({ _id }, updateUserDto)) {
+    if (await UserService.mongo.updateById(_id, updateUserDto)) {
       return [HttpStatus.OK, await UserService.mongo.findOne({ _id })];
     }
-
     return [HttpStatus.NOT_FOUND, null];
   }
 
@@ -47,7 +46,6 @@ export class UserService {
     if (await UserService.mongo.deleteById(_id)) {
       return HttpStatus.NO_CONTENT;
     }
-
     return HttpStatus.NOT_FOUND;
   }
 }

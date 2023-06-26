@@ -48,13 +48,21 @@ export class MongoHandler {
     return await this.collection.countDocuments(filter);
   }
 
-  public async updateOne(filter: Document, updatedData: Document) {
+  public async updateById(id: string, updatedData: Document): Promise<boolean> {
+    const result = await this.collection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: updatedData });
+    return result.modifiedCount > 0;
+  }
+
+  public async updateOne(filter: Document, updatedData: Document): Promise<boolean> {
     const result = await this.collection.updateOne(
       filter,
-      { $set: { updatedData } },
+      { $set: updatedData },
       { upsert: false });
-    return result.upsertedCount > 0;
+    return result.modifiedCount > 0;
   }
+
 
   public async updateMany(filter: Document, updatedData: Document) {
     const result = await this.collection.updateMany(
