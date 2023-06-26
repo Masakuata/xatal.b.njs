@@ -52,7 +52,7 @@ export class MongoHandler {
     const result = await this.collection.updateOne(
       filter,
       { $set: { updatedData } },
-      { upsert: true });
+      { upsert: false });
     return result.upsertedCount > 0;
   }
 
