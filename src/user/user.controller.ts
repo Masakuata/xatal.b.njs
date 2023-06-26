@@ -25,7 +25,6 @@ export class UserController {
   async update(@Param('id') id: string,
                @Body() updateUserDto: UpdateUserDto,
                @Res() response: Response) {
-
     const [status, user] = await this.userService.update(id, updateUserDto);
     response.status(status).send(user);
   }

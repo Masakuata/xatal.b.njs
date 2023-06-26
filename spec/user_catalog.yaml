@@ -1,26 +1,5 @@
 summary: Endpoint to perform operations against users
 description: Create and fetch users for the main xatal web service
-get:
-  summary: Fetch information about the registered users
-  description: Retrieve all the information of the registered user. Use with caution
-  tags:
-    - User Catalog
-  responses:
-    200:
-      description: The request was correctly processed and the users information has been sent
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              anyOf:
-                - $ref: './components.yaml#/components/schemas/createdUser'
-                - $ref: './components.yaml#/components/schemas/createdUser'
-                - $ref: './components.yaml#/components/schemas/createdUser'
-    204:
-      description: No users are registered. There is no information to retrieve
-    400:
-      description: The request is wrong or malformed and cannot be performed
 post:
   summary: Create a new user on the system
   description: Make a request and provide the required information to create a new user
