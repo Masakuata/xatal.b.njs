@@ -79,6 +79,8 @@ jobs:
           path: /tmp/image.tar
 
       - name: Escribir version imagen docker
+        env:
+          tag: w3edd/xatal_b:${{ steps.pVersion.outputs.value }}
         run: echo ${{ env.tag }} > /tmp/pversion
 
       - name: Guardar version
