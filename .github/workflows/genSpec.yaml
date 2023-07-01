@@ -68,7 +68,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          tags: $tag
+          tags: ${{ env.tag }}
           platforms: linux/amd64
           outputs: type=docker,dest=/tmp/image.tar
 
