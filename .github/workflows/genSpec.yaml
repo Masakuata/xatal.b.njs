@@ -78,6 +78,15 @@ jobs:
           name: image
           path: /tmp/image.tar
 
+      - name: Escribir version imagen docker
+        run: echo ${{ env.tag }} > pversion
+
+      - name: Guardar version
+        uses: actions/upload-artifact@v3
+        with:
+          name: pversion
+          path: /tmp/pversion
+
   publish_image:
     runs-on: ubuntu-latest
     needs: [ spec_gen, build_image ]
@@ -92,17 +101,19 @@ jobs:
           path: /tmp
 
       - name: Obtener version del servicio
-        uses: SebRollen/toml-action@v1.0.0
-        id: pVersion
+        uses: actions/download-artifact@v3
         with:
-          file: 'project.toml'
-          field: 'version'
+          name: pversion
+          path: /tmp
+
+      - name: Guardar version en variable
+        run: tag=$(cat /tmp/pversion)
 
       - name: Cargar imagen de docker local
         run: docker load --input /tmp/image.tar
 
       - name: Push image to DockerHub
         env:
-          tag: w3edd/xatal_b:${{ steps.pVersion.outputs.value }}
+          tag: w3edd/xatal_b:$tag
         run: |
           docker push $tag
