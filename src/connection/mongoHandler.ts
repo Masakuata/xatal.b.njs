@@ -2,10 +2,9 @@ import * as process from 'process';
 import { Collection, Db, Document, MongoClient, ObjectId } from 'mongodb';
 
 export class MongoHandler {
-  private static readonly connString: string =
-    'mongodb+srv://<username>:<password>@netherite.4zr0v.mongodb.net/?retryWrites=true&w=majority'
-      .replace('<username>', process.env.MONGO_USER)
-      .replace('<password>', process.env.MONGO_PASSWORD);
+  private static readonly connString: string = process.env.MONGO_URL
+    .replace('<username>', process.env.MONGO_USER)
+    .replace('<password>', process.env.MONGO_PASSWORD);
 
   private static readonly client = new MongoClient(MongoHandler.connString);
   public collection: Collection = null;

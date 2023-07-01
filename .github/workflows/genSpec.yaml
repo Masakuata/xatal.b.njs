@@ -9,8 +9,33 @@ on:
       - main
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configurar node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Iniciar npm
+        run: npm ci
+
+      - name: Ejecutar pruebas
+        env:
+          MONGO_URL: ${{ secrets.MONGO_URL }}
+          MONGO_USER: ${{ secrets.MONGO_USER }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+        run: npm run test
+
   spec_gen:
     runs-on: ubuntu-latest
+    needs: test
     steps:
       - name: Checkout spec
         uses: actions/checkout@v2
@@ -38,6 +63,7 @@ jobs:
           publish_dir: specs
 
   build_image:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -64,6 +90,7 @@ jobs:
           context: .
           tags: ${{ env.tag }}
           platforms: linux/amd64
+          push: false
           outputs: type=docker,dest=/tmp/image.tar
 
       - name: Guardar imagen
