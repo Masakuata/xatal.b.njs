@@ -108,14 +108,10 @@ jobs:
           name: pversion
           path: /tmp
 
-      - name: Guardar version en variable
-        run: tag=$(cat /tmp/pversion)
-
       - name: Cargar imagen de docker local
         run: docker load --input /tmp/image.tar
 
       - name: Push image to DockerHub
-        env:
-          tag: w3edd/xatal_b:$tag
         run: |
+          tag=$(cat /tmp/pversion)
           docker push $tag
