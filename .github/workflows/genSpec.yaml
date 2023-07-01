@@ -79,7 +79,7 @@ jobs:
           path: /tmp/image.tar
 
       - name: Escribir version imagen docker
-        run: echo ${{ env.tag }} > pversion
+        run: echo ${{ env.tag }} > /tmp/pversion
 
       - name: Guardar version
         uses: actions/upload-artifact@v3
